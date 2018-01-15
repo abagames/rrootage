@@ -96,19 +96,18 @@ If you have any comments, please mail to cs8k-cyu@asahi-net.or.jp
 
 ### Webpage
 
-rRootage webpage:
-http://www.asahi-net.or.jp/~cs8k-cyu/windows/rr_e.html
+[rRootage webpage](http://www.asahi-net.or.jp/~cs8k-cyu/windows/rr_e.html)
 
 
 ### Acknowledgement
 
-[libBulletML](http://user.ecc.u-tokyo.ac.jp/~s31552/wp/libbulletml/) is used to parse BulletML files.
+[libBulletML](http://shinh.skr.jp/libbulletml/index_en.html) is used to parse BulletML files.
  
 [Simple DirectMedia Layer](http://www.libsdl.org/) is used for the display handling. 
 
 [SDL_mixer](http://www.libsdl.org/projects/SDL_mixer/) and [Ogg Vorbis CODEC](http://www.vorbis.com/) to play BGM/SE. 
 
-[Mersenne Twister](http://www.math.keio.ac.jp/matumoto/emt.html) to create the random number.
+[Mersenne Twister](http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html) to create the random number.
  
 ### History
 

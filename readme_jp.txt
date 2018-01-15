@@ -84,7 +84,7 @@ http://www.asahi-net.or.jp/~cs8k-cyu/windows/rr.html
 
 BulletMLファイルのパースにlibBulletMLを利用しています。
  libBulletML
- http://user.ecc.u-tokyo.ac.jp/~s31552/wp/libbulletml/
+ http://shinh.skr.jp/libbulletml/
 
 画面の出力にはSimple DirectMedia Layerを利用しています。
  Simple DirectMedia Layer
@@ -97,13 +97,13 @@ BGMとSEの出力にSDL_mixerとOgg Vorbis CODECを利用しています。
  http://www.vorbis.com/
 
 乱数発生器にMersenne Twisterを利用しています。
- http://www.math.keio.ac.jp/matumoto/emt.html
+ http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/mt.html
 
 
 ○ ヒストリ
 
 2018  1/15  ver. 0.24
-            SDLアップデートによるWindows10での動作安定。
+            SDLのアップデート。
 2003  8/15  ver. 0.23
             弾幕の調整。
             libBulletMLのアップデート。
