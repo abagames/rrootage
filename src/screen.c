@@ -36,10 +36,20 @@ static int screenWidth, screenHeight;
 
 // Reset viewport when the screen is resized.
 static void screenResized() {
-  glViewport(0, 0, screenWidth, screenHeight);
+  int viewportWidth = screenWidth;
+  int viewportHeight = screenHeight;
+  // Maintain aspect ratio between SCREEN_WIDTH and SCREEN_HEIGHT.
+  if (screenHeight * SCREEN_WIDTH  > screenWidth * SCREEN_HEIGHT) {
+    viewportHeight = SCREEN_HEIGHT * screenWidth / SCREEN_WIDTH;
+  } else {
+    viewportWidth = SCREEN_WIDTH * screenHeight / SCREEN_HEIGHT;
+  }
+  int offsetX = (screenWidth - viewportWidth) / 2;
+  int offsetY = (screenHeight - viewportHeight) / 2;
+  glViewport(offsetX, offsetY, viewportWidth, viewportHeight);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(45.0f, (GLfloat)screenWidth/(GLfloat)screenHeight, 0.1f, FAR_PLANE);
+  gluPerspective(45.0f, (GLfloat)viewportWidth/(GLfloat)viewportHeight, 0.1f, FAR_PLANE);
   glMatrixMode(GL_MODELVIEW);
 }
 
@@ -131,6 +141,11 @@ void initSDL() {
   if ( windowMode ) {
     videoFlags = SDL_OPENGL | SDL_RESIZABLE;
   } else {
+    if ( !lowres ) {
+      // Use native desktop resolution if -lowres is not specified.
+      screenWidth = 0;
+      screenHeight = 0;
+    }
     videoFlags = SDL_OPENGL | SDL_FULLSCREEN;
   } 
   if ( SDL_SetVideoMode(screenWidth, screenHeight, 0, videoFlags) == NULL ) {
@@ -138,6 +153,10 @@ void initSDL() {
     SDL_Quit();
     exit(2);
   }
+
+  SDL_Surface* videoSurface = SDL_GetVideoSurface();
+  screenWidth = videoSurface->w;
+  screenHeight = videoSurface->h;
 
   stick = SDL_JoystickOpen(0);
 
