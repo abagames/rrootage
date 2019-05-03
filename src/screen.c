@@ -967,11 +967,17 @@ int buttonReversed = 0;
 int getButtonState() {
   int btn = 0;
   int btn1 = 0, btn2 = 0, btn3 = 0, btn4 = 0;
+  int btn5 = 0, btn6 = 0, btn7 = 0, btn8 = 0, btn9 = 0;
   if ( stick != NULL ) {
     btn1 = SDL_JoystickGetButton(stick, 0);
     btn2 = SDL_JoystickGetButton(stick, 1);
     btn3 = SDL_JoystickGetButton(stick, 2);
     btn4 = SDL_JoystickGetButton(stick, 3);
+    btn5 = SDL_JoystickGetButton(stick, 4);
+    btn6 = SDL_JoystickGetButton(stick, 5);
+    btn7 = SDL_JoystickGetButton(stick, 6);
+    btn8 = SDL_JoystickGetButton(stick, 7);
+    btn9 = SDL_JoystickGetButton(stick, 9);
   }
   if ( keys[SDLK_z] == SDL_PRESSED || btn1 || btn4 ) {
     if ( !buttonReversed ) {
@@ -986,6 +992,9 @@ int getButtonState() {
     } else {
       btn |= PAD_BUTTON1;
     }
+  }
+  if (keys [SDLK_p] == SDL_PRESSED || btn5 || btn6 || btn7 || btn8 || btn9) {
+    btn |= PAD_BUTTONP;
   }
   return btn;
 }

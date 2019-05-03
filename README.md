@@ -17,10 +17,11 @@ Unpack rr0_24.zip, and execute 'rr.exe'.
 
 ### How to play.
 
-* Movement Arrow key / Joystick
-* Laser [Z] / Trigger 1, Trigger 4
-* Special [X] / Trigger 2, Trigger 3
-* Pause [P]
+- Movement Arrow key / Joystick
+- Laser [Z] / Trigger 1, Trigger 4
+- Special [X] / Trigger 2, Trigger 3
+- Pause [P] / Trigger 5,6,7,8,9
+- Quit [Esc]
 
 Select the stage by a keyboard or a joystick.
 Press a laser key to start the game.
@@ -33,7 +34,7 @@ Press a special key to change the game mode.
 This is the standard game mode.
 Your ship becomes slow while holding the laser key.
 
-* Special -> Bomb
+- Special -> Bomb
 
 The bomb wipes enemyies bullets.
 The number of bombs are displayed at the right-down corner.
@@ -44,7 +45,7 @@ As your ship grazes a bullet,
 the graze meter(displayed at the right-down corner) increases.
 When the graze meter becomes full, the ship becomes invincible for a while.
 
-* Special -> Rolling
+- Special -> Rolling
 
 This movement widen the range that the ship can graze.
 While holding this key, the ship becomes slow.
@@ -57,7 +58,7 @@ All bullets also have these attributes,
 and your ship can absorb bullets that has the same ttribute.
 Absorbed bullets are changed into lasers automatically.
 
-* Special -> Attribution change
+- Special -> Attribution change
 
 Change your ships attribute.
 
@@ -66,7 +67,7 @@ Change your ships attribute.
 Your ship can use the reflector.
 The reflector reflects bullets around your ship.
 
-* Special -> Reflector
+- Special -> Reflector
 
 To use the reflector,
 you have to hold this key until
@@ -82,10 +83,10 @@ The ship extends 200,000 and every 500,000 points.
 
 These options are available:
 
-* -fullscreen Launch the game in the full-screen.
-* -nosound Stop the sound.
-* -reverse Reverse the laser key and the bomb key.
-* -lowres Use the low resolution mode.
+- -fullscreen Launch the game in the full-screen.
+- -nosound Stop the sound.
+- -reverse Reverse the laser key and the bomb key.
+- -lowres Use the low resolution mode.
 
 ### How to build
 
@@ -133,27 +134,27 @@ If you have any comments, please mail to cs8k-cyu@asahi-net.or.jp
 
 2018 1/15 ver. 0.24
 
-* Update SDL.
+- Update SDL.
 
 2003 8/15 ver. 0.23
 
-* Adjust barrages.
-* Update libBulletML.
-* Fix memory handling bugs.
+- Adjust barrages.
+- Update libBulletML.
+- Fix memory handling bugs.
 
 2003 4/26 ver. 0.22
 
-* Adjust barrages.
+- Adjust barrages.
 
 2003 4/ 4 ver. 0.21
 
-* Add new barrages.
-* Adjust barrages.
+- Add new barrages.
+- Adjust barrages.
 
 2003 3/21 ver. 0.2
 
-* Add new game modes.
-* Timer stops while the battleship changing the shape.
-* Adjust bullets.
+- Add new game modes.
+- Timer stops while the battleship changing the shape.
+- Adjust bullets.
 
 2003 3/16 ver. 0.1

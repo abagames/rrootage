@@ -20,6 +20,7 @@
 #define PAD_RIGHT 8
 #define PAD_BUTTON1 16
 #define PAD_BUTTON2 32
+#define PAD_BUTTONP 64
 
 #define DEFAULT_BRIGHTNESS 224
 

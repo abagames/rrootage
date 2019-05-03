@@ -239,6 +239,7 @@ int main(int argc, char *argv[]) {
   SDL_Event event;
   long nowTick;
   int frame;
+  int buttons;
 
   windowMode = 1;
   parseArgs(argc, argv);
@@ -251,8 +252,9 @@ int main(int argc, char *argv[]) {
   while ( !done ) {
     SDL_PollEvent(&event);
     keys = SDL_GetKeyState(NULL);
+    buttons = getButtonState();
     if ( keys[SDLK_ESCAPE] == SDL_PRESSED || event.type == SDL_QUIT ) done = 1;
-    if ( keys[SDLK_p] == SDL_PRESSED ) {
+    if ( buttons & PAD_BUTTONP ) {
       if ( !pPrsd ) {
 	if ( status == IN_GAME ) {
 	  status = PAUSE;
