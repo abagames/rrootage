@@ -13,6 +13,8 @@ Shootem up game, 'rRootage'.
 
 [Download: rr0_24.zip](http://abagames.sakura.ne.jp/windows/rr0_24.zip)
 
+[Download: rr0_23.zip](http://abagames.sakura.ne.jp/windows/rr0_23.zip) (for Win9x users)
+
 Unpack rr0_24.zip, and execute 'rr.exe'.
 
 ### How to play.
