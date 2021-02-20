@@ -19,8 +19,11 @@ add_executable(
 	
 
 	
+if(NOT MSVC)
+target_link_libraries(rR SDLlibs bulletML gl glu)
+else()
 target_link_libraries(rR SDLlibs bulletML opengl32 glu32)
-
+endif()
 set_property(TARGET rR PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 
