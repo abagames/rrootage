@@ -7,5 +7,7 @@
 # define DECLSPEC
 #endif
 
+#include <string.h>
+
 #endif // ! bulletmlcommon_h_
 
