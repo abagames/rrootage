@@ -9,10 +9,16 @@
  *
  * @version $Revision: 1.4 $
  */
+
+//windows is necesary to be able to use opengl like this
+#define WIN32_LEAN_AND_MEAN
+#include "windows.h"
+
 #include "SDL.h"
 
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include "GL/GL.h"
+#include "GL/GLU.h"
+
 
 #define PAD_UP 1
 #define PAD_DOWN 2
