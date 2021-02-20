@@ -20,7 +20,7 @@ add_executable(
 
 	
 if(NOT MSVC)
-target_link_libraries(rR SDLlibs bulletML gl glu)
+target_link_libraries(rR SDLlibs bulletML GL GLU)
 else()
 target_link_libraries(rR SDLlibs bulletML opengl32 glu32)
 endif()
