@@ -11,9 +11,10 @@
  */
 
 //windows is necesary to be able to use opengl like this
-#define WIN32_LEAN_AND_MEAN
-#include "windows.h"
-
+#ifdef _WIN32
+	#define WIN32_LEAN_AND_MEAN
+	#include "windows.h"
+#endif
 #include "SDL.h"
 
 #include "GL/GL.h"
