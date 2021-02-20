@@ -17,8 +17,8 @@
 #endif
 #include "SDL.h"
 
-#include "GL/GL.h"
-#include "GL/GLU.h"
+#include "GL/gl.h"
+#include "GL/glu.h"
 
 
 #define PAD_UP 1
