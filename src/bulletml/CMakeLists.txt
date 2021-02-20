@@ -17,3 +17,6 @@ add_library(bulletML STATIC ${BULLETML_SOURCE_FILES})
 
 target_include_directories(bulletML PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 
+if(NOT MSVC)
+        set_target_properties(bulletML PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -Wno-deprecated-declarations")
+endif()

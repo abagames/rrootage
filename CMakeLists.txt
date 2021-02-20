@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("rRootage")
 
-
+set (CMAKE_CXX_STANDARD 14)
 
 # setup SDL library
 set(SDL_PATH "K:/Programming/SDL-1.2.15" CACHE  PATH "path to SDL installation")

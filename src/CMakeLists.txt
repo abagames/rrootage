@@ -23,3 +23,9 @@ target_link_libraries(rR SDLlibs bulletML opengl32 glu32)
 
 set_property(TARGET rR PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
+
+if(NOT MSVC)
+        
+        set_target_properties(rR PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -Wno-deprecated-declarations")
+endif()
+

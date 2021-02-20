@@ -73,14 +73,14 @@ namespace yggdrasil {
 
 namespace ygg_utility {
 
-ygg_string ygg_utility::make_indent(int indent) {
+ygg_string  make_indent(int indent) {
 	if (0 <= indent) {
 		return make_indent(indent -1) + ygg_term::indent;			//	return
 	} else {
 		return ygg_term::empty;										//	return
 	}
 }
-ygg_string ygg_utility::encode_xml(const ygg_string &X) {
+ygg_string  encode_xml(const ygg_string &X) {
 	ygg_string X_text = X;
 	ygg_string_replace(X_text, "&", "&amp;");
 	ygg_string_replace(X_text, "<", "&lt;");
@@ -89,7 +89,7 @@ ygg_string ygg_utility::encode_xml(const ygg_string &X) {
 //	ygg_string_replace(X_text, "\t", "&#9;");
 	return X_text;													//	return
 }
-ygg_string ygg_utility::encode_attribute(const ygg_string &X) {
+ygg_string  encode_attribute(const ygg_string &X) {
 	ygg_string X_text = X;
 	ygg_string_replace(X_text, "&", "&amp;");
 	ygg_string_replace(X_text, "<", "&lt;");
@@ -100,7 +100,7 @@ ygg_string ygg_utility::encode_attribute(const ygg_string &X) {
 	ygg_string_replace(X_text, "\t", "&#9;");
 	return X_text;													//	return
 }
-ygg_string ygg_utility::encode_sox(const ygg_string &X) {
+ygg_string  encode_sox(const ygg_string &X) {
 	ygg_string X_text = X;
 	ygg_string_replace(X_text, "&", "&amp;");
 	ygg_string_replace(X_text, "<", "&lt;");
@@ -109,10 +109,10 @@ ygg_string ygg_utility::encode_sox(const ygg_string &X) {
 	ygg_string_replace(X_text, "\t", "&#9;");
 	return X_text;													//	return
 }
-ygg_string ygg_utility::encode_sox(int indent, const ygg_string &X) {
-	return ygg_utility::encode_sox(make_indent(indent), X);			//	return
+ygg_string  encode_sox(int indent, const ygg_string &X) {
+	return  encode_sox(make_indent(indent), X);			//	return
 }
-ygg_string ygg_utility::encode_sox(const ygg_string &indent, const ygg_string &X) {
+ygg_string  encode_sox(const ygg_string &indent, const ygg_string &X) {
 	ygg_string X_text;
 	ygg_string buffer = X;
 	ygg_string::size_type p;
@@ -256,15 +256,15 @@ ygg_string decode_xml(const ygg_string &X) {
 #endif
 
 
-ygg_string ygg_utility::decode_attribute(const ygg_string &X) {
-	return ygg_utility::decode_xml(X);								//	return
+ygg_string  decode_attribute(const ygg_string &X) {
+	return  decode_xml(X);								//	return
 }
-ygg_string ygg_utility::decode_sox(int , const ygg_string &X) {
+ygg_string  decode_sox(int , const ygg_string &X) {
 //	indent;
 	return decode_xml(X);											//	return
 }
 
-ygg_node & ygg_utility::format_tree(ygg_node &node, unsigned int max_row_length) {
+ygg_node &  format_tree(ygg_node &node, unsigned int max_row_length) {
 	ygg_string type;
 	bool is_text_node = ygg_node_type::root == node.get_type();
 	bool is_simple_element = true;
@@ -295,7 +295,7 @@ ygg_node & ygg_utility::format_tree(ygg_node &node, unsigned int max_row_length)
 	return node;
 }
 
-ygg_string ygg_utility::xml_trim(const ygg_string &X) {
+ygg_string  xml_trim(const ygg_string &X) {
 	ygg_string X_text = X;
 
 	for(ygg_string::size_type p = 0, p_end;
@@ -307,7 +307,7 @@ ygg_string ygg_utility::xml_trim(const ygg_string &X) {
 
 	return X_text;
 }
-ygg_string ygg_utility::both_trim(const ygg_string &X) {
+ygg_string  both_trim(const ygg_string &X) {
 	ygg_string X_text = X;
 	ygg_string::size_type start_pos = X_text.find_first_not_of(ygg_term::white_space);
 	if (ygg_string::npos == start_pos) {
@@ -321,7 +321,7 @@ ygg_string ygg_utility::both_trim(const ygg_string &X) {
 	return X_text;
 }
 
-ygg_error_code ygg_utility::check_name(const ygg_string &X) {
+ygg_error_code  check_name(const ygg_string &X) {
 	using namespace ygg_term;
 	using namespace ygg_error_term;
 
@@ -366,7 +366,7 @@ ygg_error_code ygg_utility::check_name(const ygg_string &X) {
 
 
 //	文字列置換 [ 〆 ]
-ygg_string & ygg_utility::ygg_string_replace(
+ygg_string &  ygg_string_replace(
 		ygg_string &body,
 		const ygg_string &X_search, const ygg_string &X_replace) {
 
@@ -379,7 +379,7 @@ ygg_string & ygg_utility::ygg_string_replace(
 	return body;													//	return
 }
 
-ygg_string ygg_utility::create_line(ygg_node X_list, const ygg_string &separator) {
+ygg_string  create_line(ygg_node X_list, const ygg_string &separator) {
 	ygg_string line_string;
 	for(int i = 0; X_list[i].is_valid(); ++i) {
 		line_string += separator + X_list[i].get_value().get_string();
@@ -808,7 +808,7 @@ ygg_string ygg_comment::get_text() const {
 }
 ygg_string ygg_comment::get_xml(const ygg_string &) const {
 	ygg_string X_text = value;
-	ygg_utility::ygg_string_replace(X_text, "-->", "--&gt;");
+	 ygg_string_replace(X_text, "-->", "--&gt;");
 	return ygg_term::comment_lead +X_text +ygg_term::comment_trail;	//	return
 }
 ygg_string ygg_comment::get_xml_attribute() const {
@@ -1790,7 +1790,7 @@ xml_parser & xml_parser::parse_string(const ygg_string &X_text) {
 		if (0 != p) {
 		//	先にテキストを処理...
 			ygg_string source_text = unparsed_buffer.substr(0, p);
-			value = decode_xml(ygg_utility::xml_trim(source_text));
+			value = decode_xml( xml_trim(source_text));
 			if (ygg_node_type::text == last_node.get_type()) {
 			//	続きのテキスト...
 				last_node.set_value(last_node.get_value().get_string() +value);
