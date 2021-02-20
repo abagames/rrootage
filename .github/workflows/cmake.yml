@@ -24,7 +24,7 @@ jobs:
       
 
     - name: Dependencies
-      run: sudo apt-get install libsdl1.2debian libsdl-gfx1.2-5 libsdl-gfx1.2-dev libsdl-mixer1.2  libsdl-mixer1.2-dev 
+      run: sudo apt-get install libsdl1.2debian libsdl-gfx1.2-5 libsdl-gfx1.2-dev libsdl-mixer1.2  libsdl-mixer1.2-dev mesa-common-dev freeglut3-dev
 
     - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
