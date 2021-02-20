@@ -58,6 +58,8 @@ else()
 		
 		FetchContent_MakeAvailable(ext_sdlmixer)
 		
+		message(STATUS "Downloaded SDL libraries" )
+		
 		set(SDL_PATH "${CMAKE_BINARY_DIR}/libs/SDL/")
 		set(SDLMIXER_PATH "${CMAKE_BINARY_DIR}/libs/SDL_Mixer/")
 	endif()
