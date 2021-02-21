@@ -20,6 +20,8 @@ set(DOWNLOAD_DEPS true CACHE BOOL "Automatic download SDL")
 
 add_library(SDLlibs INTERFACE)
 
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
 if(NOT MSVC)
 	find_path(SDL_PATH SDL.h
 	HINTS
@@ -67,10 +69,12 @@ endif()
 
 
 
-
-
-
-target_link_directories(SDLlibs INTERFACE "${SDL_PATH}/lib/x64" "${SDLMIXER_PATH}/lib/x64")
+# 32 bit check
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+	target_link_directories(SDLlibs INTERFACE "${SDL_PATH}/lib/x64" "${SDLMIXER_PATH}/lib/x64")
+else()
+	target_link_directories(SDLlibs INTERFACE "${SDL_PATH}/lib/x86" "${SDLMIXER_PATH}/lib/x86")
+endif()
 target_link_libraries(SDLlibs INTERFACE SDL SDLmain SDL_mixer)
 target_include_directories(SDLlibs INTERFACE "${SDL_PATH}/include" "${SDLMIXER_PATH}/include")
 
