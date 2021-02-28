@@ -68,13 +68,16 @@ else()
 endif()
 
 
-
 # 32 bit check
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-	target_link_directories(SDLlibs INTERFACE "${SDL_PATH}/lib/x64" "${SDLMIXER_PATH}/lib/x64")
+	set(SDLMAIN_DLL_PATH "${SDL_PATH}/lib/x64")
+	set(SDLMIXER_DLL_PATH "${SDLMIXER_PATH}/lib/x64")
 else()
-	target_link_directories(SDLlibs INTERFACE "${SDL_PATH}/lib/x86" "${SDLMIXER_PATH}/lib/x86")
+	set(SDLMAIN_DLL_PATH "${SDL_PATH}/lib/x86")
+	set(SDLMIXER_DLL_PATH "${SDLMIXER_PATH}/lib/x86")
 endif()
+
+target_link_directories(SDLlibs INTERFACE "${SDLMAIN_DLL_PATH}" "${SDLMIXER_DLL_PATH}")
 target_link_libraries(SDLlibs INTERFACE SDL SDLmain SDL_mixer)
 target_include_directories(SDLlibs INTERFACE "${SDL_PATH}/include" "${SDLMIXER_PATH}/include")
 
