@@ -9,6 +9,8 @@
  *
  * @version $Revision: 1.6 $
  */
+#include "screen.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,7 +20,7 @@
 #include <string.h>
 
 #include "genmcr.h"
-#include "screen.h"
+
 #include "rr.h"
 #include "degutil.h"
 #include "attractmanager.h"
@@ -33,6 +35,7 @@
 #define LOWRES_SCREEN_HEIGHT 240
 
 static int screenWidth, screenHeight;
+
 
 // Reset viewport when the screen is resized.
 static void screenResized() {
@@ -60,6 +63,7 @@ void resized(int width, int height) {
 
 // Init OpenGL.
 static void initGL() {
+
   glViewport(0, 0, screenWidth, screenHeight);
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -162,6 +166,12 @@ void initSDL() {
 
   /* Set the title bar in environments that support it */
   SDL_WM_SetCaption(CAPTION, NULL);
+
+  //if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+  //{
+	//  printf("Failed to initialize GLAD");
+	//  return;
+  //}
 
   initGL();
   loadGLTexture(STAR_BMP, &starTexture);

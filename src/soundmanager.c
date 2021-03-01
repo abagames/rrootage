@@ -10,12 +10,15 @@
  * @version $Revision: 1.3 $
  */
 #include "SDL.h"
+
+#include "SDL_mixer.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
 #include <string.h>
 
-#include "SDL_mixer.h"
+
 #include "soundmanager.h"
 
 static int useAudio = 0;
