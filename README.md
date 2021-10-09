@@ -114,9 +114,7 @@ These options are available:
    $ make
    ```
 
-### Comments
-
-If you have any comments, please mail to cs8k-cyu@asahi-net.or.jp
+If you want to build rRootage in Visual Studio, you can use [the cmake branch](https://github.com/abagames/rrootage/tree/cmake). Details are given in [PR #8](https://github.com/abagames/rrootage/pull/8).
 
 ### Webpage
 
