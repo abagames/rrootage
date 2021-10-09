@@ -12,11 +12,25 @@
 extern "C" {
 #include "SDL.h"
 #include <sys/types.h>
-#include <dirent.h>
+
 #include "genmcr.h"
 #include "brgmng_mtd.h"
-}
 
+#ifdef _WIN32
+	//this is necessary to get it to build as its missing the definition
+	FILE _iob[] = { *stdin, *stdout, *stderr };
+
+	extern "C" FILE * __cdecl __iob_func(void)
+	{
+		return _iob;
+	}
+
+#include "dirent_windows.h"
+
+#else
+#include "dirent.h"
+#endif
+}
 #include "barragemanager.h"
 
 Barrage barragePattern[BARRAGE_TYPE_NUM][BARRAGE_PATTERN_MAX];
