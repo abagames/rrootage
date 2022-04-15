@@ -27,7 +27,7 @@
 extern float eyeX, eyeY, eyeZ;
 extern float pitch, roll;
 extern float zoom;
-extern Uint8 *keys;
+extern const Uint8 *keys;
 extern SDL_Joystick *stick;
 extern int buttonReversed;
 extern int lowres;

@@ -251,9 +251,9 @@ int main(int argc, char *argv[]) {
 
   while ( !done ) {
     SDL_PollEvent(&event);
-    keys = SDL_GetKeyState(NULL);
+    keys = SDL_GetKeyboardState(NULL);
     buttons = getButtonState();
-    if ( keys[SDLK_ESCAPE] == SDL_PRESSED || event.type == SDL_QUIT ) done = 1;
+    if ( keys[SDL_SCANCODE_ESCAPE] == SDL_PRESSED || event.type == SDL_QUIT ) done = 1;
     if ( buttons & PAD_BUTTONP ) {
       if ( !pPrsd ) {
 	if ( status == IN_GAME ) {
@@ -266,8 +266,8 @@ int main(int argc, char *argv[]) {
     } else {
       pPrsd = 0;
     }
-    if ( event.type == SDL_VIDEORESIZE ) {
-      resized(event.resize.w, event.resize.h);
+    if ( event.type == SDL_WINDOWEVENT_RESIZED ) {
+      resized(event.window.data1, event.window.data2);
     }
 
     nowTick = SDL_GetTicks();
