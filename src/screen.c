@@ -33,6 +33,10 @@
 #define LOWRES_SCREEN_HEIGHT 240
 
 static int screenWidth, screenHeight;
+static Uint32 fullscreen_mode = SDL_WINDOW_FULLSCREEN;
+
+static SDL_Window* window;
+static SDL_Renderer* renderer;
 
 // Reset viewport when the screen is resized.
 static void screenResized() {
@@ -117,7 +121,7 @@ static GLuint titleTexture;
 int lowres = 0;
 int windowMode = 0;
 int brightness = DEFAULT_BRIGHTNESS;
-Uint8 *keys;
+const Uint8 *keys;
 SDL_Joystick *stick = NULL;
 
 void initSDL() {
@@ -139,29 +143,28 @@ void initSDL() {
 
   /* Create an OpenGL screen */
   if ( windowMode ) {
-    videoFlags = SDL_OPENGL | SDL_RESIZABLE;
+    videoFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
   } else {
     if ( !lowres ) {
       // Use native desktop resolution if -lowres is not specified.
       screenWidth = 0;
       screenHeight = 0;
     }
-    videoFlags = SDL_OPENGL | SDL_FULLSCREEN;
-  } 
-  if ( SDL_SetVideoMode(screenWidth, screenHeight, 0, videoFlags) == NULL ) {
+    videoFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN;
+  }
+
+
+  if ( SDL_CreateWindowAndRenderer(screenWidth, screenHeight, videoFlags, &window, &renderer ) == -1 ) {
     fprintf(stderr, "Unable to create OpenGL screen: %s\n", SDL_GetError());
     SDL_Quit();
     exit(2);
   }
-
-  SDL_Surface* videoSurface = SDL_GetVideoSurface();
-  screenWidth = videoSurface->w;
-  screenHeight = videoSurface->h;
+  SDL_GetWindowSize(window, &screenWidth, &screenHeight);
 
   stick = SDL_JoystickOpen(0);
 
   /* Set the title bar in environments that support it */
-  SDL_WM_SetCaption(CAPTION, NULL);
+  SDL_SetWindowTitle(window, CAPTION);
 
   initGL();
   loadGLTexture(STAR_BMP, &starTexture);
@@ -219,7 +222,7 @@ void drawGLSceneEnd() {
 }
 
 void swapGLScene() {
-  SDL_GL_SwapBuffers();
+  SDL_GL_SwapWindow(window);
 }
 
 void drawBox(GLfloat x, GLfloat y, GLfloat width, GLfloat height, 
@@ -947,16 +950,16 @@ int getPadState() {
       hat = SDL_JoystickGetHat(stick, 0);
     }
   }
-  if ( keys[SDLK_RIGHT] == SDL_PRESSED || keys[SDLK_KP6] == SDL_PRESSED || x > JOYSTICK_AXIS || (hat & SDL_HAT_RIGHT)) {
+  if ( keys[SDL_SCANCODE_RIGHT] == SDL_PRESSED || keys[SDL_SCANCODE_KP_6] == SDL_PRESSED || x > JOYSTICK_AXIS || (hat & SDL_HAT_RIGHT)) {
     pad |= PAD_RIGHT;
   }
-  if ( keys[SDLK_LEFT] == SDL_PRESSED || keys[SDLK_KP4] == SDL_PRESSED || x < -JOYSTICK_AXIS || (hat & SDL_HAT_LEFT)) {
+  if ( keys[SDL_SCANCODE_LEFT] == SDL_PRESSED || keys[SDL_SCANCODE_KP_4] == SDL_PRESSED || x < -JOYSTICK_AXIS || (hat & SDL_HAT_LEFT)) {
     pad |= PAD_LEFT;
   }
-  if ( keys[SDLK_DOWN] == SDL_PRESSED || keys[SDLK_KP2] == SDL_PRESSED || y > JOYSTICK_AXIS || (hat & SDL_HAT_DOWN)) {
+  if ( keys[SDL_SCANCODE_DOWN] == SDL_PRESSED || keys[SDL_SCANCODE_KP_2] == SDL_PRESSED || y > JOYSTICK_AXIS || (hat & SDL_HAT_DOWN)) {
     pad |= PAD_DOWN;
   }
-  if ( keys[SDLK_UP] == SDL_PRESSED ||  keys[SDLK_KP8] == SDL_PRESSED || y < -JOYSTICK_AXIS || (hat & SDL_HAT_UP)) {
+  if ( keys[SDL_SCANCODE_UP] == SDL_PRESSED ||  keys[SDL_SCANCODE_KP_8] == SDL_PRESSED || y < -JOYSTICK_AXIS || (hat & SDL_HAT_UP)) {
     pad |= PAD_UP;
   }
   return pad;
@@ -979,22 +982,34 @@ int getButtonState() {
     btn8 = SDL_JoystickGetButton(stick, 7);
     btn9 = SDL_JoystickGetButton(stick, 9);
   }
-  if ( keys[SDLK_z] == SDL_PRESSED || btn1 || btn4 ) {
+  if ( keys[SDL_SCANCODE_Z] == SDL_PRESSED || btn1 || btn4 ) {
     if ( !buttonReversed ) {
       btn |= PAD_BUTTON1;
     } else {
       btn |= PAD_BUTTON2;
     }
   }
-  if ( keys[SDLK_x] == SDL_PRESSED || btn2 || btn3 ) {
+  if ( keys[SDL_SCANCODE_X] == SDL_PRESSED || btn2 || btn3 ) {
     if ( !buttonReversed ) {
       btn |= PAD_BUTTON2;
     } else {
       btn |= PAD_BUTTON1;
     }
   }
-  if (keys [SDLK_p] == SDL_PRESSED || btn5 || btn6 || btn7 || btn8 || btn9) {
+  if (keys [SDL_SCANCODE_P] == SDL_PRESSED || btn5 || btn6 || btn7 || btn8 || btn9) {
     btn |= PAD_BUTTONP;
+  }
+  if (keys [SDL_SCANCODE_F] == SDL_PRESSED) {
+    auto Uint32 flags = SDL_GetWindowFlags(window);
+    if ((flags & SDL_WINDOW_FULLSCREEN))
+    	flags = 0;
+    else if((flags & SDL_WINDOW_FULLSCREEN_DESKTOP))
+    	flags = 0;
+    else 
+    	flags = fullscreen_mode;
+
+    SDL_SetWindowFullscreen(window, flags);
+
   }
   return btn;
 }
